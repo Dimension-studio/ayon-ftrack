@@ -4,7 +4,7 @@ certifi==2022.9.24
 charset-normalizer==2.1.1
 clique==1.6.1
 colorama==0.4.6
-ftrack-python-api==2.3.0
+ftrack-python-api==2.3.3
 future==0.18.2
 idna==3.4
 ayon-python-api==1.0.0rc3
