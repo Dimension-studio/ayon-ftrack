@@ -39,19 +39,19 @@ leecher:
 		export AYON_ADDON_NAME="ftrack" && \
 		export AYON_ADDON_VERSION=$(VERSION) && \
 		. $(CURDIR)/venv/bin/activate && \
-		python "$(CURDIR)/main.py" --service leecher $@
+		python "$(CURDIR)/main.py" --service leecher
 
 processor:
 		export AYON_ADDON_NAME="ftrack" && \
 		export AYON_ADDON_VERSION=$(VERSION) && \
 		. $(CURDIR)/venv/bin/activate && \
-		python "$(CURDIR)/main.py" --service processor $@
+		python "$(CURDIR)/main.py" --service processor
 
 services:
 		export AYON_ADDON_NAME="ftrack" && \
 		export AYON_ADDON_VERSION=$(VERSION) && \
 		. $(CURDIR)/venv/bin/activate && \
-		python "$(CURDIR)/main.py" --service both $@
+		python "$(CURDIR)/main.py" --service both
 
 info: help
 default: help
