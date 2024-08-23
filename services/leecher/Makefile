@@ -6,7 +6,7 @@ BASH_CONTAINER_NAME := $(BASE_NAME)-bash-$(VERSION)
 
 build:
 	@echo $(VERSION)
-	docker build -t $(IMAGE) .
+	docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
 
 clean:
 	docker rmi $(IMAGE)
