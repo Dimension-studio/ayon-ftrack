@@ -5,10 +5,7 @@ IMAGE := dimension-studio/$(BASE_NAME):$(VERSION)
 BASH_CONTAINER_NAME := $(BASE_NAME)-bash-$(VERSION)
 
 build:
-	docker build -t $(IMAGE) .
-
-builddebug:
-	@echo $(VERSION)
+    @echo $(VERSION)
 	docker build -t $(IMAGE) .
 
 clean:
