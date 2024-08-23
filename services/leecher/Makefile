@@ -23,7 +23,8 @@ dev:
 bash:
 	docker run --name $(BASH_CONTAINER_NAME) --rm -it --entrypoint /bin/bash $(IMAGE)
 
-pushimage:
-    docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
-    docker tag $(BASE_NAME)_$(VERSION) ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
-    docker push ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
+push-image:
+	@echo $(VERSION)
+	docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
+	docker tag $(BASE_NAME)_$(VERSION) ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
+	docker push ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
