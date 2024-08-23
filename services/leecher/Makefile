@@ -1,15 +1,10 @@
 include .env
-VERSION=$(shell python -c "import os;import sys;content={};f=open('$(CURDIR)/../../package.py');exec(f.read(),content);f.close();print(content['version'])")
+VERSION:=$(shell python -c "import os;import sys;content={};f=open('$(CURDIR)/../../package.py');exec(f.read(),content);f.close();print(content['version'])")
 BASE_NAME := ayon-dim-ftrack-leecher
 IMAGE := dimension-studio/$(BASE_NAME):$(VERSION)
 BASH_CONTAINER_NAME := $(BASE_NAME)-bash-$(VERSION)
 
-.PHONY: build
 build:
-	@echo $(VERSION)
-	docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
-
-builddebug:
 	@echo $(VERSION)
 	docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
 
