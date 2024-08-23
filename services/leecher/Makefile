@@ -25,5 +25,5 @@ bash:
 
 pushimage:
     docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
-    docker tag $(BASE_NAME)$(VERSION) ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
+    docker tag $(BASE_NAME)_$(VERSION) ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
     docker push ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
