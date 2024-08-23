@@ -8,8 +8,8 @@ if ($ARGS.Length -gt 1) {
 $script_dir_rel = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 $script_dir = (Get-Item $script_dir_rel).FullName
 
-$BASE_NAME = "ayon-ftrack-processor"
-$IMAGE_NAME = "ynput/$($BASE_NAME)"
+$BASE_NAME = "ayon-dim-ftrack-processor"
+$IMAGE_NAME = "ghcr.io/dimension-studio/$($BASE_NAME)"
 $ADDON_VERSION = Invoke-Expression -Command "python -c ""import os;import sys;content={};f=open(r'$($script_dir)/../../package.py');exec(f.read(),content);f.close();print(content['version'])"""
 $IMAGE_FULL_NAME = "$($IMAGE_NAME):$($ADDON_VERSION)"
 $BASH_CONTAINER_NAME = "$($BASE_NAME)-bash-$($ADDON_VERSION)"
@@ -73,10 +73,10 @@ function dev {
   try {
     & docker run --rm -ti `
       -v "$($script_dir):/service" `
-      --hostname ftrackproc `
+      --hostname dim-ftrackproc `
       --env AYON_API_KEY=$env:AYON_API_KEY `
       --env AYON_SERVER_URL=$env:AYON_SERVER_URL `
-      --env AYON_ADDON_NAME=ftrack `
+      --env AYON_ADDON_NAME=dim-ftrack `
       --env AYON_ADDON_VERSION=$ADDON_VERSION `
       "$IMAGE_FULL_NAME" python -m processor
   } finally {
