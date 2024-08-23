@@ -4,8 +4,8 @@ BASE_NAME := ayon-dim-ftrack-leecher
 IMAGE := dimension-studio/$(BASE_NAME):$(VERSION)
 BASH_CONTAINER_NAME := $(BASE_NAME)-bash-$(VERSION)
 
-print-version:
-    @echo $(VERSION)
+printversion:
+	@echo $(VERSION)
 
 build:
 	docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
