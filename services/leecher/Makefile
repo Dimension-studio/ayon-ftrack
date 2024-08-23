@@ -4,10 +4,11 @@ BASE_NAME := ayon-dim-ftrack-leecher
 IMAGE := dimension-studio/$(BASE_NAME):$(VERSION)
 BASH_CONTAINER_NAME := $(BASE_NAME)-bash-$(VERSION)
 
-printversion:
-	@echo $(VERSION)
+# Phony targets to prevent conflicts with file names
+.PHONY: build clean
 
 build:
+	@echo $(VERSION)
 	docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
 
 clean:
