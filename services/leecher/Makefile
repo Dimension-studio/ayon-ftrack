@@ -18,7 +18,7 @@ dev:
 		-v $(CURDIR):/service \
 		--env AYON_API_KEY=${AYON_API_KEY} \
 		--env AYON_SERVER_URL=${AYON_SERVER_URL} \
-		--env AYON_ADDON_NAME=ftrack \
+		--env AYON_ADDON_NAME=dim-ftrack \
 		--env AYON_ADDON_VERSION=$(VERSION) \
 		$(IMAGE) python -m leecher
 
