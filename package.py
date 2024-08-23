@@ -1,11 +1,11 @@
-name = "ftrack"
-version = "1.1.21"
-title = "Ftrack"
+name = "dim-ftrack"
+version = "1.1.9"
+title = "Dim-Ftrack"
 client_dir = "ayon_ftrack"
 
 services = {
-    "leecher": {"image": f"ynput/ayon-ftrack-leecher:{version}"},
-    "processor": {"image": f"ynput/ayon-ftrack-processor:{version}"}
+    "leecher": {"image": f"dimension-studio/ayon-dim-ftrack-leecher:{version}"},
+    "processor": {"image": f"dimension-studio/ayon-dim-ftrack-processor:{version}"}
 }
 
 plugin_for = ["ayon_server"]

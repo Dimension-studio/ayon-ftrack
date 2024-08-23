@@ -1,7 +1,7 @@
 include .env
 VERSION=$(shell python -c "import os;import sys;content={};f=open('$(CURDIR)/../../package.py');exec(f.read(),content);f.close();print(content['version'])")
-BASE_NAME := ayon-ftrack-leecher
-IMAGE := ynput/$(BASE_NAME):$(VERSION)
+BASE_NAME := ayon-dim-ftrack-leecher
+IMAGE := dimension-studio/$(BASE_NAME):$(VERSION)
 BASH_CONTAINER_NAME := $(BASE_NAME)-bash-$(VERSION)
 
 build:
@@ -21,3 +21,8 @@ dev:
 
 bash:
 	docker run --name $(BASH_CONTAINER_NAME) --rm -it --entrypoint /bin/bash $(IMAGE)
+
+pushimage:
+    docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
+    docker tag $(BASE_NAME)$(VERSION) ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
+    docker push ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
