@@ -2,10 +2,10 @@ name: ayon-dim-ftrack-services
 services:
   leecher:
     container_name: dim-leecher
-    image: ghcr.io/dimension-studio/ayon-dim-ftrack-leecher:1.1.9
+    image: ghcr.io/dimension-studio/ayon-dim-ftrack-leecher:1.1.10
     restart: unless-stopped
     environment:
       - "AYON_SERVER_URL=${AYON_SERVER_URL}"
       - "AYON_API_KEY=${AYON_API_KEY}"
       - "AYON_ADDON_NAME=dim-ftrack"
-      - "AYON_ADDON_VERSION=1.1.9"
+      - "AYON_ADDON_VERSION=1.1.10"
