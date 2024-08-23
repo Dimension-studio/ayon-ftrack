@@ -4,8 +4,8 @@ title = "Dim-Ftrack"
 client_dir = "ayon_ftrack"
 
 services = {
-    "leecher": {"image": f"dimension-studio/ayon-dim-ftrack-leecher:{version}"},
-    "processor": {"image": f"dimension-studio/ayon-dim-ftrack-processor:{version}"}
+    "leecher": {"image": f"ghcr.io/dimension-studio/ayon-dim-ftrack-leecher:{version}"},
+    "processor": {"image": f"ghcr.io/dimension-studio/ayon-dim-ftrack-processor:{version}"}
 }
 
 plugin_for = ["ayon_server"]

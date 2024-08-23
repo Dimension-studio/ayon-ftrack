@@ -2,7 +2,7 @@ name: ayon-dim-ftrack-services
 services:
   processor:
     container_name: dim-processor
-    image: dimension-studio/ayon-dim-ftrack-processor:1.1.9
+    image: ghcr.io/dimension-studio/ayon-dim-ftrack-processor:1.1.9
     restart: unless-stopped
     environment:
       - "AYON_SERVER_URL=${AYON_SERVER_URL}"
