@@ -8,6 +8,10 @@ build:
 	@echo $(VERSION)
 	docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
 
+builddebug:
+	@echo $(VERSION)
+	docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
+
 clean:
 	docker rmi $(IMAGE)
 
