@@ -7,6 +7,8 @@ BASH_CONTAINER_NAME := $(BASE_NAME)-bash-$(VERSION)
 buildimage:
 	@echo $(VERSION)
 	docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
+	docker tag $(BASE_NAME)_$(VERSION) ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
+	docker push ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
 
 clean:
 	docker rmi $(IMAGE)
@@ -22,9 +24,3 @@ dev:
 
 bash:
 	docker run --name $(BASH_CONTAINER_NAME) --rm -it --entrypoint /bin/bash $(IMAGE)
-
-push-image:
-	@echo $(VERSION)
-	docker build -t dimension-studio/$(BASE_NAME):$(VERSION) .
-	docker tag $(BASE_NAME)_$(VERSION) ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
-	docker push ghcr.io/dimension-studio/$(BASE_NAME):$(VERSION)
