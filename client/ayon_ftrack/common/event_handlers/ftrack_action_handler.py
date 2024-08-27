@@ -491,7 +491,6 @@ class BaseAction(BaseHandler):
         project_settings = self.get_project_settings_from_event(
             event, project_name
         )
-        self.log.debug(f'project_settings: {project_settings}')
         return project_settings["dim-ftrack"]
 
     def valid_roles(self, session, entities, event):

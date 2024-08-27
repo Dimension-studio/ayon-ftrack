@@ -9,7 +9,7 @@ $script_dir_rel = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 $script_dir = (Get-Item $script_dir_rel).FullName
 
 $BASE_NAME = "ayon-dim-ftrack-processor"
-$IMAGE_NAME = "ghcr.io/dimension-studio/$($BASE_NAME)"
+$IMAGE_NAME = "dimension-studio/$($BASE_NAME)"
 $ADDON_VERSION = Invoke-Expression -Command "python -c ""import os;import sys;content={};f=open(r'$($script_dir)/../../package.py');exec(f.read(),content);f.close();print(content['version'])"""
 $IMAGE_FULL_NAME = "$($IMAGE_NAME):$($ADDON_VERSION)"
 $BASH_CONTAINER_NAME = "$($BASE_NAME)-bash-$($ADDON_VERSION)"
@@ -51,7 +51,8 @@ function clean {
 function dist {
   build
   # Publish the docker image to the registry
-  docker push "$IMAGE_FULL_NAME"
+  docker tag $IMAGE_FULL_NAME "ghcr.io/$IMAGE_FULL_NAME"
+  docker push "ghcr.io/$IMAGE_FULL_NAME"
 }
 
 function load-env {
