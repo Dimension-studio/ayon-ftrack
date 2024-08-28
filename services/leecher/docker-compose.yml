@@ -2,6 +2,16 @@ name: ayon-dim-ftrack-services
 services:
   prod-leecher:
     container_name: prod-dim-leecher
+    image: ghcr.io/dimension-studio/ayon-dim-ftrack-leecher:1.1.12
+    restart: unless-stopped
+    environment:
+      - "AYON_SERVER_URL=${AYON_SERVER_URL}"
+      - "AYON_API_KEY=${AYON_API_KEY}"
+      - "AYON_ADDON_NAME=dim-ftrack"
+      - "AYON_ADDON_VERSION=1.1.12"
+
+  stage-leecher:
+    container_name: stage-dim-leecher
     image: ghcr.io/dimension-studio/ayon-dim-ftrack-leecher:1.1.11
     restart: unless-stopped
     environment:
@@ -9,13 +19,3 @@ services:
       - "AYON_API_KEY=${AYON_API_KEY}"
       - "AYON_ADDON_NAME=dim-ftrack"
       - "AYON_ADDON_VERSION=1.1.11"
-
-  stage-leecher:
-    container_name: stage-dim-leecher
-    image: ghcr.io/dimension-studio/ayon-dim-ftrack-leecher:1.1.10
-    restart: unless-stopped
-    environment:
-      - "AYON_SERVER_URL=${AYON_SERVER_URL}"
-      - "AYON_API_KEY=${AYON_API_KEY}"
-      - "AYON_ADDON_NAME=dim-ftrack"
-      - "AYON_ADDON_VERSION=1.1.10"
