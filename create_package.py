@@ -39,6 +39,7 @@ import package
 FileMapping = Tuple[Union[str, io.BytesIO], str]
 ADDON_NAME: str = package.name
 ADDON_VERSION: str = package.version
+ADDON_PREVIOUS_VERSION: str = package.previous_version
 ADDON_CLIENT_DIR: Union[str, None] = getattr(package, "client_dir", None)
 
 CURRENT_ROOT: str = os.path.dirname(os.path.abspath(__file__))
@@ -263,26 +264,35 @@ def update_docker_version(logger):
             content = stream.read()
 
         new_lines = []
+        unique_lines = []
+        version_types = [ADDON_VERSION, ADDON_PREVIOUS_VERSION]
         image_changed = None
         env_changed = None
+        i = 0
+        ii = 0
         for line in content.splitlines():
-            if env_changed is None:
-                env_r = env_regex.search(line)
-                if env_r:
-                    base = env_r.group("base")
-                    end = env_r.group("end")
-                    new_line = f"{base}{ADDON_VERSION}{end}"
-                    env_changed = new_line != line
-                    line = new_line
-            if image_changed is None:
-                image_r = image_regex.search(line)
-                if image_r:
-                    base = image_r.group("base")
-                    new_line = f"{base}{ADDON_VERSION}"
-                    image_changed = new_line != line
-                    line = new_line
+            env_r = env_regex.search(line)
+            image_r = image_regex.search(line)
+            if env_r and line not in unique_lines:
+                base = env_r.group("base")
+                end = env_r.group("end")
+                new_line = f"{base}{version_types[i]}{end}"
+                new_lines.append(new_line)
+                env_changed = new_line != line
+                i =+ 1
 
-            new_lines.append(line)
+            elif image_r and line not in unique_lines:
+                base = image_r.group("base")
+                new_line = f"{base}{version_types[ii]}"
+                image_changed = new_line != line
+                new_lines.append(new_line)
+                ii =+ 1
+
+            else:
+                unique_lines.append(line)
+                new_lines.append(line)
+
+
 
         if env_changed is None:
             logger.error(
