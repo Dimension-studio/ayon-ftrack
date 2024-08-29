@@ -491,7 +491,7 @@ class BaseAction(BaseHandler):
         project_settings = self.get_project_settings_from_event(
             event, project_name
         )
-        return project_settings["dim-ftrack"]
+        return project_settings["dim-ftrack"] # This is changed to match the name of the addon
 
     def valid_roles(self, session, entities, event):
         """Validate user roles by settings.
