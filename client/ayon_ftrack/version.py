@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 """Package declaring AYON addon 'dim-ftrack' version."""
-__version__ = "1.1.14"
+__version__ = "1.1.10+build.1"

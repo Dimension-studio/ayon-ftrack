@@ -20,7 +20,7 @@ class FtrackAddon(
     ITrayAddon,
     IPluginPaths,
 ):
-    name = "ftrack"
+    name = "dim-ftrack"
     version = __version__
 
     def initialize(self, settings):

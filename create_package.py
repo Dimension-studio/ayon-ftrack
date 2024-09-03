@@ -38,7 +38,9 @@ import package
 
 FileMapping = Tuple[Union[str, io.BytesIO], str]
 ADDON_NAME: str = package.name
-ADDON_VERSION: str = package.version
+ADDON_ORIGINAL_VERSION: str = package.version
+ADDON_VERSION: str = package.package_version
+DOCKER_VERSION: str = package.docker_version
 ADDON_PREVIOUS_VERSION: str = package.previous_version
 ADDON_CLIENT_DIR: Union[str, None] = getattr(package, "client_dir", None)
 
@@ -265,7 +267,7 @@ def update_docker_version(logger):
 
         new_lines = []
         unique_lines = []
-        version_types = [ADDON_VERSION, ADDON_PREVIOUS_VERSION]
+        version_types = [DOCKER_VERSION, ADDON_PREVIOUS_VERSION]
         image_changed = None
         env_changed = None
         i = 0
@@ -480,13 +482,49 @@ def create_addon_package(
         output_dir, f"{ADDON_NAME}-{ADDON_VERSION}.zip"
     )
 
+    original_version = ADDON_ORIGINAL_VERSION
+
+    log.info(f"Updating package.py addon version to {ADDON_VERSION}")
+
     with ZipFileLongPaths(output_path, "w", zipfile.ZIP_DEFLATED) as zipf:
         # Copy server content
         for src_file, dst_subpath in files_mapping:
+            if src_file == os.path.join(CURRENT_ROOT, "package.py"):
+                with open(src_file, "r") as file:
+                    lines = file.readlines()
+                    version = 'version'
+                    service_verison  = 'service_version'
+                    new_value = ADDON_VERSION
+                    service_version = ADDON_ORIGINAL_VERSION
+                    with open(src_file, "w") as file:
+                        for line in lines:
+                            if line.startswith(version):
+                                file.write(f'{version} = "{new_value}"\n')
+                            elif line.startswith(service_verison):
+                                file.write(f'{service_verison} = "{service_version}"\n')
+                            else:
+                                file.write(line)
             if isinstance(src_file, io.BytesIO):
                 zipf.writestr(dst_subpath, src_file.getvalue())
             else:
                 zipf.write(src_file, dst_subpath)
+
+        # Reset version back to original value
+        for src_file, dst_subpath in files_mapping:
+            if src_file == os.path.join(CURRENT_ROOT, "package.py"):
+                with open(src_file, "r") as file:
+                    lines = file.readlines()
+                    version = 'version'
+                    new_value = original_version
+                    with open(src_file, "w") as file:
+                        for line in lines:
+                            if line.startswith(version):
+                                file.write(f'{version} = "{new_value}"\n')
+                            elif line.startswith("service_verison"):
+                                file.write(f'')
+                            else:
+                                file.write(line)
+
 
     log.info("Package created")
 
