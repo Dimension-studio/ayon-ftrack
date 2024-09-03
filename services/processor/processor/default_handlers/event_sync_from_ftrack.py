@@ -535,7 +535,7 @@ class SyncProcess:
         project_settings = self.event_handler.get_project_settings_from_event(
             self.event, project_name
         )
-        if not is_ftrack_enabled_in_settings(project_settings["ftrack"]):
+        if not is_ftrack_enabled_in_settings(project_settings["dim-ftrack"]):
             self.log.debug(
                 f"ftrack is disabled for project \"{project_name}\""
             )

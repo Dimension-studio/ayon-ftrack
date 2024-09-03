@@ -153,7 +153,7 @@ class PushHierValuesToNonHierEvent(BaseEventHandler):
         # Load status mapping from presets
         event_settings: dict[str, Any] = (
             project_settings
-            ["ftrack"]
+            ["dim-ftrack"]
             ["service_event_handlers"]
             [self.settings_key]
         )
