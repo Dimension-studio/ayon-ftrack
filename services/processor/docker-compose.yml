@@ -2,10 +2,10 @@ name: ayon-dim-ftrack-services
 services:
   processor:
     container_name: prod-dim-processor
-    image: ghcr.io/dimension-studio/ayon-dim-ftrack-processor:1.1.13
+    image: ghcr.io/dimension-studio/ayon-dim-ftrack-processor:1.1.14
     restart: unless-stopped
     environment:
       - "AYON_SERVER_URL=${AYON_SERVER_URL}"
       - "AYON_API_KEY=${AYON_API_KEY}"
       - "AYON_ADDON_NAME=dim-ftrack"
-      - "AYON_ADDON_VERSION=1.1.13"
+      - "AYON_ADDON_VERSION=1.1.14"
